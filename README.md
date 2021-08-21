@@ -2,6 +2,7 @@
 [![GitHub release](https://img.shields.io/github/release/SkylaneGames/brackeys-6.svg?style=flat)](https://github.com/SkylaneGames/brackeys-6/releases)
 
 # About
+Submission for the [2021.2 Brackey's Game Jam](https://itch.io/jam/brackeys-6).
 
 ## Theme
 -- Enter theme here --
@@ -9,3 +10,4 @@
 # Contributors
 Name | Role
 -|-
+Jeremy | Developer

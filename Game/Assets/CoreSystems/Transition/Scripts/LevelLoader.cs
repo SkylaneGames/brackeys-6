@@ -35,6 +35,7 @@ namespace CoreSystems.Transition.Scripts
         void Awake()
         {
             _transitions = GetComponentsInChildren<Transition>();
+            Debug.Log($"Loading transitions {_transitions.Count()}");
             SetTransition(transitionIn);
         }
 
@@ -45,7 +46,7 @@ namespace CoreSystems.Transition.Scripts
 
             if (_currentTransition == null)
             {
-                Debug.LogError($"Transition '{type.ToString()}' does not exist.");
+                Debug.LogError($"Transition '{type}' does not exist.");
             }
             else
             {
