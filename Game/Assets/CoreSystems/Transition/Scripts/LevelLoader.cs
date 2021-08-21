@@ -35,7 +35,6 @@ namespace CoreSystems.Transition.Scripts
         void Awake()
         {
             _transitions = GetComponentsInChildren<Transition>();
-            Debug.Log($"Loading transitions {_transitions.Count()}");
             SetTransition(transitionIn);
         }
 
