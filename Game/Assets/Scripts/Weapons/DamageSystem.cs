@@ -1,18 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public event Action Destroyed;
+
+    [SerializeField]
+    private float _maxHealth = 100f;
+    public float MaxHealth => _maxHealth;
+
+    private float _currentHealth;
+    public float CurrentHealth
     {
-        
+        get => _currentHealth;
+        private set
+        {
+            _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        CurrentHealth = MaxHealth;
+    }
+
+    public void Damage(float amount)
+    {
+        CurrentHealth -= amount;
+
+        if (CurrentHealth == 0)
+        {
+            Destroyed?.Invoke();
+        }
+    }
+
+    public void Heal(float amount)
+    {
+        CurrentHealth += amount;
     }
 }

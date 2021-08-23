@@ -41,6 +41,17 @@ namespace Weapons
                 _weapons[index].StopFiring();
             }
         }
+
+        private void OnDrawGizmosSelected()
+        {
+            foreach (var weapon in _weapons)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(weapon.transform.position, weapon.MinRange);
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(weapon.transform.position, weapon.MaxRange);
+            }
+        }
     }
 
     [Serializable]

@@ -52,7 +52,7 @@ namespace Weapons
                 var damageSystem = hit.collider.GetComponent<DamageSystem>();
                 if (damageSystem != null)
                 {
-                    // Damage the object
+                    damageSystem.Damage(_damagePerSecond * Time.deltaTime);
                 }
             }
             else

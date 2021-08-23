@@ -17,11 +17,11 @@ namespace Weapons
 
         [SerializeField]
         private float _maxRange = 50f;
-        protected float MaxRange => _maxRange;
+        public float MaxRange => _maxRange;
 
         [SerializeField]
         private float _minRange = 5f;
-        protected float MinRange => _minRange;
+        public float MinRange => _minRange;
 
         [SerializeField]
         private FireMode _firingMode = FireMode.Single;
