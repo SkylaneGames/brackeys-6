@@ -4892,7 +4892,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22822
+  m_Name: pb_Mesh40826
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5955,6 +5955,7 @@ GameObject:
   - component: {fileID: 1977904272}
   - component: {fileID: 1977904271}
   - component: {fileID: 1977904270}
+  - component: {fileID: 1977904274}
   m_Layer: 0
   m_Name: Mech
   m_TagString: Untagged
@@ -6009,7 +6010,19 @@ MonoBehaviour:
     m_ActionId: e838136e-40f1-4f40-95d8-af27ac23a2ca
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1977904271}
+        m_TargetAssemblyTypeName: MechController, Assembly-CSharp
+        m_MethodName: Fire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 72f0edd6-86f6-41d3-80cc-12d133354c4d
     m_ActionName: Player/Fire[/Mouse/leftButton,/Saitek Saitek Pro Flight Quadrant/trigger]
   - m_PersistentCalls:
@@ -6110,6 +6123,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1977904274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977904269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c25d6b28c1881114381c26cad8fc7859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapons:
+  - {fileID: 8172255067333416920}
+  - {fileID: 2001293487}
+  _weaponGroups:
+  - GroupIndex: 0
+    WeaponIndexes: 0000000001000000
 --- !u!1 &1997327044
 GameObject:
   m_ObjectHideFlags: 0
@@ -6167,7 +6198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6175,15 +6206,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -6191,14 +6222,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 7016676784956462547, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_Name
-      value: Laser
+      value: Laser.TopRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147926897472013515, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147926897472013515, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
+--- !u!114 &2001293487 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8172255067333416920, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
+  m_PrefabInstance: {fileID: 2001293486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255612cb75c4f20408a928f786dbbe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2005795055
 GameObject:
   m_ObjectHideFlags: 0
@@ -6935,7 +6985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6943,15 +6993,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -6959,11 +7009,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432063182202845273, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 7016676784956462547, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: m_Name
-      value: Laser
+      value: Laser.TopLeft
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
+--- !u!114 &8172255067333416920 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8172255067333416920, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
+  m_PrefabInstance: {fileID: 8172255067333416918}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255612cb75c4f20408a928f786dbbe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
