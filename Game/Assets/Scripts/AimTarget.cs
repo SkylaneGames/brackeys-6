@@ -14,6 +14,10 @@ public class AimTarget : MonoBehaviour
     [SerializeField]
     private float _maxRadius = 20f;
 
+    [SerializeField]
+    [Range(0f, 1f)]
+    private float _targetSpeed = 0.05f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +47,8 @@ public class AimTarget : MonoBehaviour
                 newPoint = _parent.position + toVector.normalized * _minRadius;
             }
 
-            transform.position = newPoint;
+
+            transform.position = Vector3.Lerp(transform.position, newPoint, _targetSpeed);
         }
     }
 }
