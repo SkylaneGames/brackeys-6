@@ -10,6 +10,15 @@ public class LookAt : MonoBehaviour
     [SerializeField]
     private float _speed = 0.1f;
 
+    //[SerializeField]
+    //private bool _yOnly = false;
+
+    [SerializeField]
+    private Vector3 _axis;
+
+    [SerializeField]
+    private Vector3 _forward = Vector3.up;
+
     private void Start()
     {
         if (_lookTarget == null)
@@ -22,10 +31,22 @@ public class LookAt : MonoBehaviour
     void FixedUpdate()
     {
         var vectorToTarget = _lookTarget.position - transform.position;
-        vectorToTarget.y = 0;
-        var directionToTarget = vectorToTarget.normalized;
-        var rotation = Vector3.SignedAngle(Vector3.forward, directionToTarget, Vector3.up);
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(rotation, Vector3.up), _speed);
+        //if (_yOnly)
+        //{
+        //    vectorToTarget.y = 0;
+        //}
+
+        Vector3 directionToTarget;
+        if (_axis != Vector3.zero)
+        {
+            directionToTarget = new Vector3(vectorToTarget.x * _axis.x, vectorToTarget.y * _axis.y, vectorToTarget.z * _axis.z).normalized;
+        }
+        else
+        {
+            directionToTarget = vectorToTarget.normalized;
+        }
+
+        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.FromToRotation(_forward, directionToTarget), _speed);
     }
 }

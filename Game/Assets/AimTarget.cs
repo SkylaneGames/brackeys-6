@@ -8,7 +8,10 @@ public class AimTarget : MonoBehaviour
     [SerializeField]
     private Transform _parent;
 
+    [SerializeField]
     private float _minRadius = 5f;
+
+    [SerializeField]
     private float _maxRadius = 20f;
 
     // Start is called before the first frame update
