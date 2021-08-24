@@ -14,6 +14,9 @@ namespace Weapons
         [SerializeField]
         private List<WeaponGroup> _weaponGroups = new List<WeaponGroup>();
 
+        public float MinRange => _weapons.Min(p => p.MinRange);
+        public float MaxRange => _weapons.Max(p => p.MaxRange);
+
         // Start is called before the first frame update
         void Start()
         {

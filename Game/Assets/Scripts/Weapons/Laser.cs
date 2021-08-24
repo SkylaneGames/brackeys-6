@@ -5,15 +5,15 @@ using UnityEngine;
 namespace Weapons
 {
     [RequireComponent(typeof(LineRenderer))]
-    public class Laser : ChargeWeapon
+    public class Laser : EnergyWeapon
     {
         [SerializeField]
         [Range(0f, 1000f)]
         private float _damagePerSecond = 10f;
 
         [SerializeField]
-        [Range(0f, 1f)]
-        private float _energyDrainPerSecond = 0.05f;
+        [Range(0f, 1000f)]
+        private float _energyDrainPerSecond = 10f;
 
         private LineRenderer _lineRenderer;
 
@@ -47,8 +47,8 @@ namespace Weapons
             //Gizmos.DrawLine(transform.position, transform.position + transform.forward * 20f);
             if (Physics.Raycast(transform.position, transform.forward, out var hit, MaxRange))
             {
+                Debug.Log($"{name} : Hit {hit.collider.name}");
                 end = hit.point;
-
                 var damageSystem = hit.collider.GetComponent<DamageSystem>();
                 if (damageSystem != null)
                 {
@@ -76,7 +76,7 @@ namespace Weapons
 
         private void Drain()
         {
-            Energy -= _energyDrainPerSecond * Time.deltaTime;
+            Discharge(_energyDrainPerSecond * Time.deltaTime);
         }
     } 
 }
