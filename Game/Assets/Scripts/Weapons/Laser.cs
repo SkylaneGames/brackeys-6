@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Weapons
 {
     [RequireComponent(typeof(LineRenderer))]
+    [RequireComponent(typeof(AudioSource))]
     public class Laser : EnergyWeapon
     {
         [SerializeField]
@@ -16,11 +17,13 @@ namespace Weapons
         private float _energyDrainPerSecond = 10f;
 
         private LineRenderer _lineRenderer;
+        private AudioSource _audio;
 
         protected override void Awake()
         {
             base.Awake();
             _lineRenderer = GetComponent<LineRenderer>();
+            _audio = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
@@ -66,11 +69,13 @@ namespace Weapons
         protected override void OnFire(Transform reticule)
         {
             _lineRenderer.enabled = true;
+            _audio.Play();
         }
 
         protected override void OnStopFiring()
         {
             _lineRenderer.enabled = false;
+            _audio.Stop();
         }
 
         private void Drain()

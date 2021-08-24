@@ -12,17 +12,21 @@ public class MechController : UnitController
 {
     private CharacterController _characterController;
     private Animator _animator;
+    private AudioSource _footsteps;
 
     private Vector2 _positionInput = Vector2.zero;
 
     [SerializeField]
     private float _animationSpeedScale = 0.25f;
 
+    public override Vector3 Velocity => _characterController.velocity;
+
     protected override void Awake()
     {
         base.Awake();
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _footsteps = GetComponent<AudioSource>();
     }
 
     protected override void FixedUpdate()
@@ -52,6 +56,11 @@ public class MechController : UnitController
     public void Move(InputAction.CallbackContext context)
     {
         _positionInput = context.ReadValue<Vector2>();
+    }
+
+    public void PlayFootstep()
+    {
+        _footsteps.Play();
     }
 
     public void Fire(InputAction.CallbackContext context)

@@ -36,7 +36,7 @@ namespace Weapons
 
         public void Fire(Transform reticule = null)
         {
-            if (CanFire)
+            if (CanFire && !IsFiring)
             {
                 IsFiring = true;
                 OnFire(reticule);

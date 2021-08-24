@@ -11,7 +11,7 @@ public enum Faction
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(WeaponLoadout))]
 [RequireComponent(typeof(DamageSystem))]
-public class UnitController : MonoBehaviour
+public abstract class UnitController : MonoBehaviour
 {
     private WeaponLoadout _weapons;
     protected WeaponLoadout Weapons => _weapons;
@@ -29,6 +29,8 @@ public class UnitController : MonoBehaviour
     [SerializeField]
     private Faction _faction;
     public Faction Faction => _faction;
+
+    public abstract Vector3 Velocity { get; }
 
     protected virtual void Awake()
     {

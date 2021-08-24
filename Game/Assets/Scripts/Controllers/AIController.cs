@@ -17,8 +17,14 @@ public class AIController : UnitController
     [SerializeField]
     [Range(0f, 5f)]
     private float _reactionTime = 0.25f;
+
+    [SerializeField]
+    [Range(0f, 2f)]
+    private float _targetLeadScale = 0.5f;
     
     private float _timeSinceLastAction;
+
+    public override Vector3 Velocity => NavAgent.velocity;
 
     private IEnumerable<UnitController> VisibleAllies => _vision.VisibleUnits.Where(p => p.Faction == Faction);
     private IEnumerable<UnitController> VisibleEnemies => _vision.VisibleUnits.Where(p => p.Faction != Faction);
@@ -54,7 +60,7 @@ public class AIController : UnitController
             {
                 NavAgent.isStopped = true;
                 // Look at
-                _aim.Target = ClosestEnemy.transform.position;
+                _aim.Target = ClosestEnemy.transform.position + ClosestEnemy.Velocity * _targetLeadScale;
 
                 if (Weapons.CanFire && (_aim.transform.position - ClosestEnemy.transform.position).magnitude < 3f)
                 {
