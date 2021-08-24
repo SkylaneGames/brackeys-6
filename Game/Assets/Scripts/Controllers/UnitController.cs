@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public enum Faction
 [RequireComponent(typeof(DamageSystem))]
 public abstract class UnitController : MonoBehaviour
 {
+    public event EventHandler Destroyed;
+
     private WeaponLoadout _weapons;
     protected WeaponLoadout Weapons => _weapons;
 
@@ -46,6 +49,7 @@ public abstract class UnitController : MonoBehaviour
 
     private void OnDestroyed()
     {
+        Destroyed?.Invoke(this, null);
         Destroy(gameObject);
     }
 

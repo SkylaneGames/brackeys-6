@@ -13,6 +13,9 @@ public class VisionSystem : MonoBehaviour
 
     private UnitController _parent;
 
+    [SerializeField]
+    private bool _showDebug;
+
     private void Awake()
     {
         _parent = GetComponentInParent<UnitController>();
@@ -37,16 +40,20 @@ public class VisionSystem : MonoBehaviour
 
     private void UpdateVisibleUnits()
     {
-        foreach (var outOfRangeUnit in _unitsInView.Where(p => !_unitsInRange.Contains(p)).ToList())
-        {
-            _unitsInView.Remove(outOfRangeUnit);
-        }
-
         foreach (var unit in _unitsInRange)
         {
-            if (Physics.Raycast(transform.position, unit.transform.position - transform.position, out var hit))
+            //if (unit == null)
+            //{
+            //    continue;
+            //}
+
+            if (Physics.Raycast(transform.position, unit.transform.position - transform.position, out var hit, 300f, LayerMask.GetMask("Default", "Units")))
             {
-                //Debug.Log($"Checking line of sight for '{unit.name}'. Hit {hit.collider.name}");
+                if (_showDebug)
+                {
+                    Debug.Log($"Checking line of sight for '{unit.name}'. Hit {hit.collider.name}");
+                }
+
                 var lineOfSight = hit.collider.GetComponent<UnitController>() == unit;
 
                 if (lineOfSight)
@@ -63,7 +70,7 @@ public class VisionSystem : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.cyan;
+        Gizmos.color = Color.yellow;
         foreach (var unit in _unitsInView)
         {
             Gizmos.DrawLine(transform.position, unit.transform.position);
@@ -78,7 +85,16 @@ public class VisionSystem : MonoBehaviour
         {
             //Debug.Log($"'{other.name}' entered Vision Sphere");
             _unitsInRange.Add(unit);
+            unit.Destroyed += UnitDestroyed;
         }
+    }
+
+    private void UnitDestroyed(object sender, System.EventArgs e)
+    {
+        var unit = sender as UnitController;
+
+        _unitsInRange.Remove(unit);
+        _unitsInView.Remove(unit);
     }
 
     private void OnTriggerExit(Collider other)
@@ -88,6 +104,8 @@ public class VisionSystem : MonoBehaviour
         if (unit != null)
         {
             _unitsInRange.Remove(unit);
+            _unitsInView.Remove(unit);
+            unit.Destroyed -= UnitDestroyed;
         }
     }
 }

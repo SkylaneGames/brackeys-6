@@ -19,6 +19,9 @@ namespace Weapons
         private LineRenderer _lineRenderer;
         private AudioSource _audio;
 
+        [SerializeField]
+        private bool _printDebug;
+
         protected override void Awake()
         {
             base.Awake();
@@ -48,8 +51,12 @@ namespace Weapons
         {
             Vector3 end;
             //Gizmos.DrawLine(transform.position, transform.position + transform.forward * 20f);
-            if (Physics.Raycast(transform.position, transform.forward, out var hit, MaxRange))
+            if (Physics.Raycast(transform.position, transform.forward, out var hit, MaxRange, LayerMask.GetMask("Default", "Units")))
             {
+                if (_printDebug)
+                {
+                    Debug.Log($"Laser hit {hit.collider.name}");
+                }
                 end = hit.point;
                 var damageSystem = hit.collider.GetComponent<DamageSystem>();
                 if (damageSystem != null)
