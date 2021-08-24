@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Weapons;
 
+public enum Faction
+{
+    Team_1, Team_2
+}
+
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(WeaponLoadout))]
 [RequireComponent(typeof(DamageSystem))]
 public class UnitController : MonoBehaviour
 {
     private WeaponLoadout _weapons;
+    protected WeaponLoadout Weapons => _weapons;
+
     private DamageSystem _damageSystem;
 
     [SerializeField]
@@ -18,6 +25,10 @@ public class UnitController : MonoBehaviour
     [SerializeField]
     [Range(0f, 5f)]
     protected float _turnSpeed = 1f;
+
+    [SerializeField]
+    private Faction _faction;
+    public Faction Faction => _faction;
 
     protected virtual void Awake()
     {

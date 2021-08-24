@@ -47,7 +47,6 @@ namespace Weapons
             //Gizmos.DrawLine(transform.position, transform.position + transform.forward * 20f);
             if (Physics.Raycast(transform.position, transform.forward, out var hit, MaxRange))
             {
-                Debug.Log($"{name} : Hit {hit.collider.name}");
                 end = hit.point;
                 var damageSystem = hit.collider.GetComponent<DamageSystem>();
                 if (damageSystem != null)

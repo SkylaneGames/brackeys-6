@@ -153,9 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Blue Laser
-  _maxRange: 30
-  _minRange: 10
+  _maxRange: 20
+  _minRange: 3
   _firingMode: 3
-  _energyRegenPerSecond: 0.05
   _damagePerSecond: 10
-  _energyDrainPerSecond: 0.05
+  _energyDrainPerSecond: 10

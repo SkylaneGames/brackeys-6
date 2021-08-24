@@ -14,6 +14,8 @@ namespace Weapons
         [SerializeField]
         private List<WeaponGroup> _weaponGroups = new List<WeaponGroup>();
 
+        public bool CanFire => _weapons.Any(p => p.CanFire);
+
         public float MinRange => _weapons.Min(p => p.MinRange);
         public float MaxRange => _weapons.Max(p => p.MaxRange);
 
