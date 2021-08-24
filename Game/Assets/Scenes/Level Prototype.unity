@@ -6725,22 +6725,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mech
       objectReference: {fileID: 0}
-    - target: {fileID: 9090355990978960165, guid: 236e29be8052deb4d88266bcb509e997, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9090355990978960165, guid: 236e29be8052deb4d88266bcb509e997, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9090355991148883186, guid: 236e29be8052deb4d88266bcb509e997, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9090355991148883186, guid: 236e29be8052deb4d88266bcb509e997, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 236e29be8052deb4d88266bcb509e997, type: 3}
 --- !u!1001 &890470573076182267
