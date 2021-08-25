@@ -74,4 +74,16 @@ public class MechController : UnitController
             StopFiring();
         }
     }
+
+    public void FireSecondary(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            FireSecondary();
+        }
+        else if (context.canceled)
+        {
+            StopFiringSecondary();
+        }
+    }
 }

@@ -33,6 +33,11 @@ namespace Weapons
 
         public void FireWeapon(int group)
         {
+            if (!_weaponGroups.Any(p => p.GroupIndex == group))
+            {
+                return;
+            }
+
             foreach (var index in _weaponGroups.Single(p => p.GroupIndex == group).WeaponIndexes)
             {
                 _weapons[index].Fire();
@@ -41,6 +46,11 @@ namespace Weapons
 
         public void StopFiringWeapon(int group)
         {
+            if (!_weaponGroups.Any(p => p.GroupIndex == group))
+            {
+                return;
+            }
+
             foreach (var index in _weaponGroups.Single(p => p.GroupIndex == group).WeaponIndexes)
             {
                 _weapons[index].StopFiring();

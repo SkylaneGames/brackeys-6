@@ -25,7 +25,20 @@ namespace Weapons
         public float ReloadTime => _reloadTime;
 
         [SerializeField]
-        private Transform _spawnPoint;
+        private Transform[] _spawnPoints = null;
+
+        private Transform SpawnPoint
+        {
+            get
+            {
+                if (_spawnPoints == null || _spawnPoints.Length == 0)
+                {
+                    return transform;
+                }
+
+                return _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+            }
+        }
 
         [SerializeField]
         private Projectile _projectilePrefab;
@@ -35,12 +48,13 @@ namespace Weapons
         public int CurrentAmmo { get; private set; }
         public int CurrentClip { get; private set;}
 
-        public override bool CanFire => throw new System.NotImplementedException();
+        public override bool CanFire => CurrentClip > 0 && CurrentAmmo > 0;
 
         protected override void OnFire(Transform reticule)
         {
-            var projectile = Instantiate(_projectilePrefab, _spawnPoint.position, _spawnPoint.rotation);
-            
+            var spawnPoint = SpawnPoint;
+            var projectile = Instantiate(_projectilePrefab, spawnPoint.position, spawnPoint.rotation);
+            Debug.Log("Creating projectile");
             // Standard projectile simply follows a direction after after being spawned
             // Guilded projectile will home in on a fixed position
             // TODO: Homing Projectile would take in a transform (create a new weapon type which can create list of target locks) which it would home in on.
@@ -59,6 +73,9 @@ namespace Weapons
         protected override void Start()
         {
             base.Start();
+
+            CurrentClip = ClipSize;
+            CurrentAmmo = MaxAmmo;
         }
 
         // Update is called once per frame

@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ebca7df8adfc8a4d9f35b9d02149706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showDebug: 0
 --- !u!1 &890470573797514857
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,11 +150,12 @@ GameObject:
   m_Component:
   - component: {fileID: 890470574080802113}
   - component: {fileID: 890470574080802114}
-  - component: {fileID: 890470574080802115}
   - component: {fileID: 890470574080802119}
   - component: {fileID: 890470574080802118}
   - component: {fileID: 890470574080802112}
   - component: {fileID: 890470574080802117}
+  - component: {fileID: 1446434385144131926}
+  - component: {fileID: 6758532300482972563}
   m_Layer: 7
   m_Name: Drone
   m_TagString: Untagged
@@ -196,24 +198,6 @@ MonoBehaviour:
   _weaponGroups:
   - GroupIndex: 0
     WeaponIndexes: 00000000
---- !u!143 &890470574080802115
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890470574080802124}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &890470574080802119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +266,36 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &1446434385144131926
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890470574080802124}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 2
+  m_AngularDrag: 0.1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &6758532300482972563
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890470574080802124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.75
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &890470574249753839
 GameObject:
   m_ObjectHideFlags: 0

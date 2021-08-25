@@ -7,9 +7,9 @@ namespace Weapons
     public class Projectile : MonoBehaviour
     {
         [SerializeField]
-        private float _damage;
+        protected float _damage = 10f;
 
         [SerializeField]
-        private float _speed;
+        protected float _speed = 10f;
     } 
 }

@@ -9,7 +9,6 @@ public enum Faction
     Team_1, Team_2
 }
 
-[RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(WeaponLoadout))]
 [RequireComponent(typeof(DamageSystem))]
 public abstract class UnitController : MonoBehaviour
@@ -72,5 +71,15 @@ public abstract class UnitController : MonoBehaviour
     public void StopFiring()
     {
         _weapons.StopFiringWeapon(0);
+    }
+
+    public void FireSecondary()
+    {
+        _weapons.FireWeapon(1);
+    }
+
+    public void StopFiringSecondary()
+    {
+        _weapons.StopFiringWeapon(1);
     }
 }

@@ -17,7 +17,7 @@ public class EnergySystem : StatusSystem
     // Update is called once per frame
     protected override void Update()
     {
-        if (Time.time > _lastDrain + _regenDelay)
+        if (Time.time >= _lastDrain + _regenDelay)
         {
             Value += _regenPerSecond * Time.deltaTime;
         }
