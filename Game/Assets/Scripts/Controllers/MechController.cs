@@ -23,6 +23,9 @@ public class MechController : UnitController
 
     private Vector3 _gravityAccel = Vector3.zero;
 
+    [SerializeField]
+    private float _gravityScale = 1f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,7 +40,7 @@ public class MechController : UnitController
 
         if (!_characterController.isGrounded)
         {
-            _gravityAccel += Physics.gravity * Time.fixedDeltaTime;
+            _gravityAccel += Physics.gravity * Time.fixedDeltaTime * _gravityScale;
         }
         else
         {

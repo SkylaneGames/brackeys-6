@@ -159,6 +159,7 @@ MonoBehaviour:
   _firingMode: 3
   _damagePerSecond: 10
   _energyDrainPerSecond: 10
+  _printDebug: 0
 --- !u!82 &5602414617004314428
 AudioSource:
   m_ObjectHideFlags: 0
@@ -215,7 +216,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0

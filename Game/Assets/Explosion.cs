@@ -2,29 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(AudioSource))]
 public class Explosion : MonoBehaviour
 {
     [SerializeField]
-    private float _radius = 2f;
+    public float Radius = 3f;
 
     [SerializeField]
-    private float _force = 10f;
+    public float Force = 10f;
 
-    private SphereCollider _sphereCollider;
+    [SerializeField]
+    public float Damage = 10f;
 
-    public float Damage { get; set; }
+    [SerializeField]
+    private float _destroyAfter = 3f;
+
+    [SerializeField]
+    private AudioClip[] _explosionSounds;
+
+    private AudioSource _audio;
 
     private void Awake()
     {
-        _sphereCollider = GetComponent<SphereCollider>();
+        _audio = GetComponent<AudioSource>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        _sphereCollider.enabled = false;
-        _sphereCollider.radius = _radius;
+        if (_explosionSounds == null || _explosionSounds.Length == 0)
+        {
+            Debug.LogWarning($"No audio clips on explosion '{name}'");
+        }
+        else
+        {
+            _audio.clip = _explosionSounds[Random.Range(0, _explosionSounds.Length)];
+            _audio.Play();
+        }
+
+        Destroy(gameObject, _destroyAfter);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,19 +50,14 @@ public class Explosion : MonoBehaviour
         if (damageSystem != null)
         {
             var distanceFromCentre = (other.transform.position - transform.position).magnitude;
-            var damagePortion = 1 - (distanceFromCentre / _radius);
-            Debug.Log($"DistanceFromCentre: {distanceFromCentre}; Damage portion {damagePortion}");
+            var damagePortion = 1 - (distanceFromCentre / Radius);
+            //Debug.Log($"DistanceFromCentre: {distanceFromCentre}; Damage portion {damagePortion}");
             damageSystem.Damage(Damage * damagePortion);
         }
 
         if (rigidbody != null)
         {
-            rigidbody.AddExplosionForce(_force, transform.position, _radius);
+            rigidbody.AddExplosionForce(Force, transform.position, Radius);
         }
-    }
-
-    public void Explode()
-    {
-        _sphereCollider.enabled = true;
     }
 }

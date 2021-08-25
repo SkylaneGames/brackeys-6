@@ -9,9 +9,18 @@ public class Missile : Projectile
 {
     private VisualEffect _smokeEffect;
     private Rigidbody _rigidbody;
-    private MeshRenderer _meshRenderer;
     private Explosion _explosion;
+    private MeshRenderer _meshRenderer;
     private Light _light;
+
+    [SerializeField]
+    private float _radius = 3f;
+
+    [SerializeField]
+    private float _force = 50f;
+
+    [SerializeField]
+    private Explosion Explosion;
 
     private float _collisionDelay = 0.1f;
 
@@ -21,8 +30,8 @@ public class Missile : Projectile
     {
         _smokeEffect = GetComponentInChildren<VisualEffect>();
         _rigidbody = GetComponent<Rigidbody>();
-        _meshRenderer = GetComponent<MeshRenderer>();
         _explosion = GetComponentInChildren<Explosion>();
+        _meshRenderer = GetComponent<MeshRenderer>();
         _light = GetComponentInChildren<Light>();
     }
 
@@ -37,7 +46,11 @@ public class Missile : Projectile
     void Update()
     {
         _timeAlive += Time.deltaTime;
-        _smokeEffect.SetVector3("Spawn Position", transform.position);
+
+        if (_smokeEffect != null)
+        {
+            _smokeEffect.SetVector3("Spawn Position", transform.position);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,15 +62,17 @@ public class Missile : Projectile
 
         if (!other.isTrigger)
         {
-            _meshRenderer.enabled = false;
-            enabled = false;
-            _smokeEffect.Stop();
+            var explosion = Instantiate(Explosion, transform.position, Quaternion.identity);
+            explosion.Damage = _damage;
+            explosion.Radius = _radius;
+            explosion.Force = _force;
+
             _rigidbody.velocity = Vector3.zero;
+            _smokeEffect.Stop();
+            _meshRenderer.enabled = false;
             _light.enabled = false;
 
-            _explosion.Explode();
-
-            Destroy(gameObject, 5f);
+            Destroy(gameObject, 4f);
         }
     }
 }
