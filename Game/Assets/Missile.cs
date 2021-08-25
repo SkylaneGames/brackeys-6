@@ -9,7 +9,6 @@ public class Missile : Projectile
 {
     private VisualEffect _smokeEffect;
     private Rigidbody _rigidbody;
-    private Explosion _explosion;
     private MeshRenderer _meshRenderer;
     private Light _light;
 
@@ -30,7 +29,6 @@ public class Missile : Projectile
     {
         _smokeEffect = GetComponentInChildren<VisualEffect>();
         _rigidbody = GetComponent<Rigidbody>();
-        _explosion = GetComponentInChildren<Explosion>();
         _meshRenderer = GetComponent<MeshRenderer>();
         _light = GetComponentInChildren<Light>();
     }
@@ -39,7 +37,6 @@ public class Missile : Projectile
     void Start()
     {
         _rigidbody.velocity = transform.forward * _speed;
-        _explosion.Damage = _damage;
     }
 
     // Update is called once per frame
