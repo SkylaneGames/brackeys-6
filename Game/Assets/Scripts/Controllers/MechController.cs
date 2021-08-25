@@ -21,6 +21,8 @@ public class MechController : UnitController
 
     public override Vector3 Velocity => _characterController.velocity;
 
+    private Vector3 _gravityAccel = Vector3.zero;
+
     protected override void Awake()
     {
         base.Awake();
@@ -33,8 +35,17 @@ public class MechController : UnitController
     {
         base.FixedUpdate();
 
+        if (!_characterController.isGrounded)
+        {
+            _gravityAccel += Physics.gravity * Time.fixedDeltaTime;
+        }
+        else
+        {
+            _gravityAccel = Vector3.zero;
+        }
+
         var move = transform.forward * _positionInput.y * _speed;
-        move.y = -9.81f;
+        move += _gravityAccel;
         transform.Rotate(Vector3.up, _positionInput.x * _turnSpeed, Space.World);
         _characterController.Move(move * Time.deltaTime);
         

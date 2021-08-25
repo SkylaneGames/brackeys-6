@@ -34,14 +34,15 @@ public class Explosion : MonoBehaviour
 
         if (damageSystem != null)
         {
-            Debug.Log($"Damaging '{other.name}' Force = {Damage}");
-            damageSystem.Damage(Damage);
+            var distanceFromCentre = (other.transform.position - transform.position).magnitude;
+            var damagePortion = 1 - (distanceFromCentre / _radius);
+            Debug.Log($"DistanceFromCentre: {distanceFromCentre}; Damage portion {damagePortion}");
+            damageSystem.Damage(Damage * damagePortion);
         }
 
         if (rigidbody != null)
         {
-            Debug.Log($"Adding force to '{other.name}' Force = {Damage}");
-            rigidbody.AddExplosionForce(_force, transform.position, _radius, 1f);
+            rigidbody.AddExplosionForce(_force, transform.position, _radius);
         }
     }
 

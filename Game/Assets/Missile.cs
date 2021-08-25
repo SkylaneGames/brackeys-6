@@ -13,7 +13,7 @@ public class Missile : Projectile
     private Explosion _explosion;
     private Light _light;
 
-    private float _collisionDelay = 0.5f;
+    private float _collisionDelay = 0.1f;
 
     private float _timeAlive = 0f;
 
