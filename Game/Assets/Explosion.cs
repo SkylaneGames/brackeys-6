@@ -14,17 +14,19 @@ public class Explosion : MonoBehaviour
     [SerializeField]
     public float Damage = 10f;
 
-    [SerializeField]
-    private float _destroyAfter = 3f;
+    //[SerializeField]
+    //private float _destroyAfter = 3f;
 
     [SerializeField]
     private AudioClip[] _explosionSounds;
 
     private AudioSource _audio;
+    private ParticleSystem _particleSystem;
 
     private void Awake()
     {
         _audio = GetComponent<AudioSource>();
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Start()
@@ -39,7 +41,7 @@ public class Explosion : MonoBehaviour
             _audio.Play();
         }
 
-        Destroy(gameObject, _destroyAfter);
+        Destroy(gameObject, _particleSystem.main.duration);
     }
 
     private void OnTriggerEnter(Collider other)
