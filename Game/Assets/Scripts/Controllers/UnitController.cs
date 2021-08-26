@@ -32,6 +32,9 @@ public abstract class UnitController : MonoBehaviour
     private Faction _faction;
     public Faction Faction => _faction;
 
+    [SerializeField]
+    private ParticleSystem _explosionEffect;
+
     public abstract Vector3 Velocity { get; }
 
     protected virtual void Awake()
@@ -49,6 +52,8 @@ public abstract class UnitController : MonoBehaviour
     private void OnDestroyed()
     {
         Destroyed?.Invoke(this, null);
+        var explosion = Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+        Destroy(explosion, explosion.main.duration);
         Destroy(gameObject);
     }
 

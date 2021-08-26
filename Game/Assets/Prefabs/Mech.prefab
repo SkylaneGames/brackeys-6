@@ -239,6 +239,7 @@ MonoBehaviour:
   _speed: 10
   _turnSpeed: 2
   _faction: 0
+  _explosionEffect: {fileID: 9041019593681649522, guid: ff046085b21e4fc46a699922f2893648, type: 3}
   _animationSpeedScale: 0.15
   _gravityScale: 3
 --- !u!114 &575751476778628056
@@ -5062,6 +5063,10 @@ PrefabInstance:
     - target: {fileID: 2304404527703786413, guid: 021f3a5ff30824e42b2241c2ac2f7442, type: 3}
       propertyPath: _maxRange
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304404527703786413, guid: 021f3a5ff30824e42b2241c2ac2f7442, type: 3}
+      propertyPath: _firingMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2304404527703786413, guid: 021f3a5ff30824e42b2241c2ac2f7442, type: 3}
       propertyPath: _spawnPoints.Array.size

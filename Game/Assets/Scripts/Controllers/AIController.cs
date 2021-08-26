@@ -77,6 +77,7 @@ public class AIController : UnitController
             {
                 StopFiring();
 
+                _aim.Target = transform.position + transform.forward * 3f;
                 var target = ClosestEnemy.transform.position;
 
                 NavAgent.isStopped = false;
