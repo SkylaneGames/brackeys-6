@@ -6825,6 +6825,10 @@ PrefabInstance:
       value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4744192709888199150, guid: 236e29be8052deb4d88266bcb509e997, type: 3}
+      propertyPath: _fireRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744192709888199150, guid: 236e29be8052deb4d88266bcb509e997, type: 3}
       propertyPath: _maxRange
       value: 40
       objectReference: {fileID: 0}

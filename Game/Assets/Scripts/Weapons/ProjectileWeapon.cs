@@ -7,17 +7,24 @@ namespace Weapons
     public class ProjectileWeapon : WeaponBase
     {
         [SerializeField]
+        [Range(0, 1000)]
         private int _maxAmmo = 50;
         public int MaxAmmo => _maxAmmo;
 
         [SerializeField]
+        private bool _infiniteAmmo;
+
+        [SerializeField]
+        [Range(0, 1000)]
         private int _clipSize = 10;
         public int ClipSize => _clipSize;
 
         [SerializeField]
+        [Range(0, 50)]
         [Tooltip("Rate of fire (per second)")]
-        private float _fireRate;
+        private float _fireRate = 2;
         protected float FireRate => _fireRate;
+        protected float FireDelay => 1 / FireRate;
 
         [SerializeField]
         [Range(0f, 20f)]
@@ -48,19 +55,19 @@ namespace Weapons
         public int CurrentAmmo { get; private set; }
         public int CurrentClip { get; private set;}
 
-        public override bool CanFire => CurrentClip > 0 && CurrentAmmo > 0;
+        public override bool CanFire => _infiniteAmmo && _timeSinceLastFire >= FireDelay || (CurrentClip > 0 && CurrentAmmo > 0);
+
+        private float _timeSinceLastFire = 0f;
+        
 
         protected override void OnFire(Transform reticule)
         {
-            var spawnPoint = SpawnPoint;
-            var projectile = Instantiate(_projectilePrefab, spawnPoint.position, spawnPoint.rotation);
-            Debug.Log("Creating projectile");
-            // Standard projectile simply follows a direction after after being spawned
-            // Guilded projectile will home in on a fixed position
-            // TODO: Homing Projectile would take in a transform (create a new weapon type which can create list of target locks) which it would home in on.
-            if (projectile is GuidedProjectile guidedProjectile)
+            if (FiringMode == FireMode.Single || FiringMode == FireMode.Burst)
             {
-                guidedProjectile.SetTarget(reticule.position);
+                if (_timeSinceLastFire >= FireDelay)
+                {
+                    LaunchProjectile(reticule);
+                }
             }
         }
 
@@ -82,6 +89,31 @@ namespace Weapons
         protected override void Update()
         {
             base.Update();
+
+            if (IsFiring)
+            {
+                if (FiringMode == FireMode.Automatic && _timeSinceLastFire >= FireDelay)
+                {
+                    LaunchProjectile(null);
+                }
+            }
+
+            _timeSinceLastFire += Time.deltaTime;
+        }
+
+        private void LaunchProjectile(Transform reticule)
+        {
+            var spawnPoint = SpawnPoint;
+            var projectile = Instantiate(_projectilePrefab, spawnPoint.position, spawnPoint.rotation);
+            // Standard projectile simply follows a direction after after being spawned
+            // Guilded projectile will home in on a fixed position
+            // TODO: Homing Projectile would take in a transform (create a new weapon type which can create list of target locks) which it would home in on.
+            if (projectile is GuidedProjectile guidedProjectile)
+            {
+                guidedProjectile.SetTarget(reticule.position);
+            }
+
+            _timeSinceLastFire = 0f;
         }
     } 
 }
