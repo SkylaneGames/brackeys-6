@@ -17,7 +17,7 @@ public class MechController : UnitController
     private Vector2 _positionInput = Vector2.zero;
 
     [SerializeField]
-    private float _animationSpeedScale = 0.25f;
+    private float _animationSpeedScale = 0.15f;
 
     public override Vector3 Velocity => _characterController.velocity;
 

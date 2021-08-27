@@ -26,6 +26,7 @@ public class Follow : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (_target == null) return;
 
         var position = _target.position + _target.rotation * _offset;
 

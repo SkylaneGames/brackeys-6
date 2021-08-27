@@ -12,7 +12,7 @@ public class AIController : UnitController
     private VisionSystem _vision;
 
     [SerializeField]
-    private AimTarget _aim;
+    protected AimTarget _aim;
 
     [SerializeField]
     [Range(0f, 5f)]
@@ -35,7 +35,7 @@ public class AIController : UnitController
     private bool _underfire;
     private Vector3 _lastAttackDirection;
 
-    private UnitController ClosestEnemy => VisibleEnemies?.OrderBy(p => (p.transform.position - transform.position).sqrMagnitude).FirstOrDefault();
+    protected UnitController ClosestEnemy => VisibleEnemies?.OrderBy(p => (p.transform.position - transform.position).sqrMagnitude).FirstOrDefault();
 
     protected override void Awake()
     {
@@ -79,9 +79,10 @@ public class AIController : UnitController
             var distanceTo = (ClosestEnemy.transform.position - transform.position).magnitude;
             if (distanceTo <= Weapons.MaxRange && distanceTo >= Weapons.MinRange)
             {
-                NavAgent.isStopped = true;
+                Stop();
+
                 // Look at
-                _aim.Target = ClosestEnemy.transform.position + ClosestEnemy.Velocity * _targetLeadScale;
+                SetAimTarget(ClosestEnemy.transform.position + ClosestEnemy.Velocity * _targetLeadScale);
 
                 if (Weapons.CanFire && (_aim.transform.position - ClosestEnemy.transform.position).magnitude < 3f)
                 {
@@ -90,25 +91,24 @@ public class AIController : UnitController
             }
             else
             {
-                StopFiring();
+                StopAttacking();
 
-                _aim.Target = transform.position + transform.forward * 3f;
+                SetAimTarget(transform.position + transform.forward * 3f);
                 var target = ClosestEnemy.transform.position;
 
-                NavAgent.isStopped = false;
-                NavAgent.SetDestination(target);
+                Move(target);
             }
         }
         else
         {
             EnemyInSight = false;
-            StopFiring();
+            StopAttacking();
 
-            _aim.Target = transform.position + transform.forward * 3f;
+            SetAimTarget(transform.position + transform.forward * 3f);
 
             if (_underfire && _lastAttackDirection != Vector3.zero)
             {
-                NavAgent.SetDestination(transform.position + _lastAttackDirection * 10f);
+                Move(transform.position + _lastAttackDirection * 10f);
             }
             else
             {
@@ -116,16 +116,65 @@ public class AIController : UnitController
 
                 if (target != null)
                 {
-                    NavAgent.isStopped = false;
-                    NavAgent.SetDestination(target.transform.position);
+                    Move(target.transform.position);
                 }
             }
         }
     }
 
-    private void Attack(Vector3 target)
+    private void Move(Vector3 position)
+    {
+        if (NavAgent.isOnNavMesh)
+        {
+            NavAgent.isStopped = false;
+            NavAgent.SetDestination(position);
+        }
+    }
+
+    private void Stop()
+    {
+        if (NavAgent.isOnNavMesh)
+        {
+            NavAgent.isStopped = true;
+        }
+    }
+
+    private void Resume()
+    {
+        if (NavAgent.isOnNavMesh)
+        {
+            NavAgent.isStopped = false;
+        }
+    }
+
+    private void SetAimTarget(Vector3 target)
+    {
+        _aim.Target = target + Vector3.down * 0.5f;
+    }
+
+    protected virtual void Attack(Vector3 target)
     {
         Fire();
+    }
+
+    protected virtual void StopAttacking()
+    {
+        StopFiring();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!NavAgent.enabled && collision.gameObject.layer == LayerMask.NameToLayer("Default"))
+        {
+            Init();
+        }
+    }
+
+    private void Init()
+    {
+        if (NavAgent.enabled) return;
+
+        NavAgent.enabled = true;
     }
 
     private void OnDrawGizmos()

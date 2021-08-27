@@ -20,6 +20,8 @@ public class AimTarget : MonoBehaviour
         get => _target;
         set
         {
+            if (Parent == null) return;
+
             var toVector = value - Parent.transform.position;
 
             var magnitude = toVector.magnitude;

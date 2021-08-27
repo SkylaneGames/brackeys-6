@@ -43,8 +43,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.63062686, b: 0.4198113, a: 1}
-  m_Intensity: 2
-  m_Range: 0.5
+  m_Intensity: 5
+  m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -303,10 +303,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256683f81cac1d541b5fc4303bc5a2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 20
+  _damage: 40
   _speed: 20
   _radius: 3
-  _force: 50
+  _force: 100
   Explosion: {fileID: 5395302313934817107, guid: 28264aed322fb8b4d927cdd7fcc86e7b, type: 3}
 --- !u!136 &7442306757080387086
 CapsuleCollider:

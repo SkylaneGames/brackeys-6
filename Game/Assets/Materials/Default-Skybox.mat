@@ -61,9 +61,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AtmosphereThickness: 0.55
+    - _AtmosphereThickness: 0.25
     - _EnableExternalAlpha: 0
-    - _Exposure: 1.25
+    - _Exposure: 0.59
     - _Rotation: 0
     - _SunDisk: 2
     - _SunSize: 0.04
