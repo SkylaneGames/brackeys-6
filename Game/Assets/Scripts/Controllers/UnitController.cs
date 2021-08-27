@@ -19,6 +19,7 @@ public abstract class UnitController : MonoBehaviour
     protected WeaponLoadout Weapons => _weapons;
 
     private DamageSystem _damageSystem;
+    protected DamageSystem DamageSystem => _damageSystem;
 
     [SerializeField]
     [Range(0f, 50f)]
@@ -49,11 +50,11 @@ public abstract class UnitController : MonoBehaviour
         _damageSystem.Destroyed += OnDestroyed;
     }
 
-    private void OnDestroyed()
+    private void OnDestroyed(object sender, EventArgs e)
     {
         Destroyed?.Invoke(this, null);
         var explosion = Instantiate(_explosionEffect, transform.position, Quaternion.identity);
-        Destroy(explosion, explosion.main.duration);
+        Destroy(explosion.gameObject, explosion.main.duration);
         Destroy(gameObject);
     }
 

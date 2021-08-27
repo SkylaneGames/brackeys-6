@@ -32,6 +32,8 @@ public class AIController : UnitController
 
     public bool EnemyInSight { get; private set; }
 
+    private bool _underfire;
+    private Vector3 _lastAttackDirection;
 
     private UnitController ClosestEnemy => VisibleEnemies?.OrderBy(p => (p.transform.position - transform.position).sqrMagnitude).FirstOrDefault();
 
@@ -41,6 +43,19 @@ public class AIController : UnitController
 
         _vision = GetComponentInChildren<VisionSystem>();
         NavAgent = GetComponent<NavMeshAgent>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        DamageSystem.Damaged += OnDamaged;
+    }
+
+    private void OnDamaged(object sender, DamagedEventArgs e)
+    {
+        _underfire = true;
+        _lastAttackDirection = e.DirectionOfAttack;
     }
 
     protected override void Update()
@@ -91,12 +106,19 @@ public class AIController : UnitController
 
             _aim.Target = transform.position + transform.forward * 3f;
 
-            var target = NetworkedUnits.FirstOrDefault(p => p.EnemyInSight);
-
-            if (target != null)
+            if (_underfire && _lastAttackDirection != Vector3.zero)
             {
-                NavAgent.isStopped = false;
-                NavAgent.SetDestination(target.transform.position);
+                NavAgent.SetDestination(transform.position + _lastAttackDirection * 10f);
+            }
+            else
+            {
+                var target = NetworkedUnits.FirstOrDefault(p => p.EnemyInSight);
+
+                if (target != null)
+                {
+                    NavAgent.isStopped = false;
+                    NavAgent.SetDestination(target.transform.position);
+                }
             }
         }
     }

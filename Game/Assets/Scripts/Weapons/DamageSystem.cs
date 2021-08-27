@@ -3,17 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void DamagedEventHandler(object sender, DamagedEventArgs e);
+
+public class DamagedEventArgs : EventArgs
+{
+    public float Amount { get; }
+    public Vector3 DirectionOfAttack { get; }
+
+    public DamagedEventArgs(float amount, Vector3 directionOfAttack)
+    {
+        Amount = amount;
+        DirectionOfAttack = directionOfAttack;
+    }
+}
+
 public class DamageSystem : StatusSystem
 {
-    public event Action Destroyed;
+    public event EventHandler Destroyed;
+    public event DamagedEventHandler Damaged;
 
-    public void Damage(float amount)
-    { 
+    private bool _destroyed = false;
+
+    public void Damage(float amount, Vector3 directionOfAttack)
+    {
         Value -= amount;
+        Damaged?.Invoke(this, new DamagedEventArgs(amount, directionOfAttack));
 
-        if (Value == 0)
+        if (Value == 0 && !_destroyed)
         {
-            Destroyed?.Invoke();
+            _destroyed = true;
+            Destroyed?.Invoke(this, null);
         }
     }
 

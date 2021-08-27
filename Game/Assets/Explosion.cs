@@ -54,7 +54,7 @@ public class Explosion : MonoBehaviour
             var distanceFromCentre = (other.transform.position - transform.position).magnitude;
             var damagePortion = 1 - (distanceFromCentre / Radius);
             //Debug.Log($"DistanceFromCentre: {distanceFromCentre}; Damage portion {damagePortion}");
-            damageSystem.Damage(Damage * damagePortion);
+            damageSystem.Damage(Damage * damagePortion, Vector3.zero);
         }
 
         if (rigidbody != null)

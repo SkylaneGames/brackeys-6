@@ -37,8 +37,8 @@ public class AimTarget : MonoBehaviour
     }
 
     [SerializeField]
-    [Range(0f, 1f)]
-    private float _targetSpeed = 0.05f;
+    [Range(0f, 10f)]
+    private float _targetSpeed = 1f;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -48,6 +48,6 @@ public class AimTarget : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, Target, _targetSpeed);
+        transform.position = Vector3.Lerp(transform.position, Target, _targetSpeed * Time.deltaTime);
     }
 }
