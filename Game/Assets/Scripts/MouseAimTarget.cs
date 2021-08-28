@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 
 public class MouseAimTarget : AimTarget
 {
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
 
         var ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 

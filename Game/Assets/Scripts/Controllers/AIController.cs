@@ -63,7 +63,7 @@ public class AIController : UnitController
         base.Update();
 
         _timeSinceLastAction += Time.deltaTime;
-        if (_timeSinceLastAction > _reactionTime)
+        if (_timeSinceLastAction >= _reactionTime)
         {
             _timeSinceLastAction = 0f;
             DecisionUpdate();
@@ -80,13 +80,17 @@ public class AIController : UnitController
             if (distanceTo <= Weapons.MaxRange && distanceTo >= Weapons.MinRange)
             {
                 Stop();
-
+                
                 // Look at
-                SetAimTarget(ClosestEnemy.transform.position + ClosestEnemy.Velocity * _targetLeadScale);
+                SetAimTarget(ClosestEnemy.transform.position);// + ClosestEnemy.Velocity * _targetLeadScale);
 
                 if (Weapons.CanFire && (_aim.transform.position - ClosestEnemy.transform.position).magnitude < 3f)
                 {
                     Attack(ClosestEnemy.transform.position);
+                }
+                else
+                {
+                    StopAttacking();
                 }
             }
             else

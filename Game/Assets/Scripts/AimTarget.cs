@@ -48,7 +48,7 @@ public class AimTarget : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, Target, _targetSpeed * Time.deltaTime);
     }

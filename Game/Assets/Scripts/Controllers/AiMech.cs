@@ -58,28 +58,4 @@ public class AiMech : AIController
     {
         _footsteps.Play();
     }
-
-    public void Fire(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Fire();
-        }
-        else if (context.canceled)
-        {
-            StopFiring();
-        }
-    }
-
-    public void FireSecondary(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            FireSecondary();
-        }
-        else if (context.canceled)
-        {
-            StopFiringSecondary();
-        }
-    }
 }
