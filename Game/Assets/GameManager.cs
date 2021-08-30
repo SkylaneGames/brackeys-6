@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         var enemies = FindObjectsOfType<UnitController>().Where(p => p.Faction == Faction.Team_2).ToList();
         _enemiesRemaining = enemies.Count;
         foreach (var unit in enemies)
@@ -71,6 +74,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator GoToMenu()
     {
         yield return new WaitForSeconds(2);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         LevelLoader.Instance.LoadLevel(Level.Menu);
     }
 }

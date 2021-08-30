@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &391532867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 391532868}
+  m_Layer: 7
+  m_Name: LookAtTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &391532868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391532867}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.81, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 575751476778628039}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196904144
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +306,7 @@ GameObject:
   - component: {fileID: 575751476778628032}
   m_Layer: 7
   m_Name: Mech
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,6 +326,7 @@ Transform:
   - {fileID: 33710579353645550}
   - {fileID: 436177773631753155}
   - {fileID: 436177773801585684}
+  - {fileID: 391532868}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -330,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _turnSpeed: 2
+  _turnSpeed: 4
   _faction: 0
   _explosionEffect: {fileID: 9041019593681649522, guid: ff046085b21e4fc46a699922f2893648, type: 3}
   _animationSpeedScale: 0.15
@@ -398,7 +429,19 @@ MonoBehaviour:
     m_ActionId: 72f0edd6-86f6-41d3-80cc-12d133354c4d
     m_ActionName: Player/Fire[/Mouse/leftButton,/Saitek Saitek Pro Flight Quadrant/trigger]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CoreSystems.Menu.Scripts.PauseMenu, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 78f06924-e0f3-4b9c-baeb-29224546ad13
     m_ActionName: Player/Pause[/Keyboard/escape]
   - m_PersistentCalls:
@@ -3143,13 +3186,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 8780352923807792350, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 6691830574667262272, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8780352923807792350, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780352923807792350, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
@@ -3395,13 +3442,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 8780352923807792350, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 6691830574667262272, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8780352923807792350, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780352923807792350, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a5ba3799eddfa64d9a01a26c34ca3f1, type: 3}
@@ -4737,7 +4788,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8172255067333416920, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: _maxRange
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8172255067333416920, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: _minRange
@@ -5156,7 +5207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2304404527703786413, guid: 021f3a5ff30824e42b2241c2ac2f7442, type: 3}
       propertyPath: _maxRange
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2304404527703786413, guid: 021f3a5ff30824e42b2241c2ac2f7442, type: 3}
       propertyPath: _firingMode
@@ -5257,7 +5308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8172255067333416920, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: _maxRange
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8172255067333416920, guid: e38a50ae8b04be14699545f00352dc11, type: 3}
       propertyPath: _minRange

@@ -36,6 +36,9 @@ namespace CoreSystems.Menu.Scripts
             Time.timeScale = 0;
             IsPaused = true;
             _canvas.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            
         }
 
         public void UnpauseGame()
@@ -43,11 +46,15 @@ namespace CoreSystems.Menu.Scripts
             Time.timeScale = 1;
             IsPaused = false;
             _canvas.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         public void Back()
         {
             UnpauseGame();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             LevelLoader.Instance.LoadLevel(Level.Menu);
         }
     }
